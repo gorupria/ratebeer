@@ -62,7 +62,7 @@ end
 
 group :production do
   # Postgres db
-  gem 'postgres', '~> 0.8.1'
+  gem 'pg', '~> 1.1', '>= 1.1.3' 
   gem 'rails_12factor'
 end
 
