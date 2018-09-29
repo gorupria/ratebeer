@@ -1,0 +1,15 @@
+language: ruby
+
+rvm:
+- 2.5.1
+
+script:
+- bundle exec rails db:migrate
+- bundle exec rspec -fd spec
+
+deploy:
+  provider: heroku
+  app: rate-beer
+  api_key:
+    secure: "0ae80866-b2e5-4048-ab64-635e6f75b695" 
+  run: "rake db:migrate"

@@ -5,6 +5,22 @@
   <%= @user.username %>
 </p>
 
+<p>
+  <% if @user.favorite_style.nil? %>
+    <%= @user.username %> does not have a favorite style yet.
+  <% else %>
+    <%= @user.username %>'s favorite style of beer is <strong><%= @user.favorite_style %></strong>.
+  <% end %>
+</p>
+
+<p>
+  <% if @user.favorite_brewery.nil? %>
+    <%= @user.username %> does not have a favorite brewery yet.
+  <% else %>
+    <%= @user.username %>'s favorite brewery is  <strong><%= @user.favorite_brewery %></strong>.
+  <% end %>
+</p>
+
 <p>has made <%= pluralize(@user.ratings.count, 'rating') %> </p>
 <p>Average rating: <%= @user.average_rating %> </p>
 
@@ -14,7 +30,7 @@
   <li>
     <%= rating %> 
     <% if @user == current_user %>
-      <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' }, class: "rating-del-btn" %>
     <% end %>
   </li>
 <% end %>
