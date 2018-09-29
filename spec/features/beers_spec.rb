@@ -6,6 +6,11 @@ describe "Beer" do
   BeerClubsController
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
   let!(:beer) { FactoryBot.create :beer, name: "iso 3", brewery: brewery }
+  let!(:user){ FactoryBot.create(:user) }
+
+  before :each do
+    sign_in(username: "Pekka", password: "Foobar1")
+  end
   
   before { Beer.destroy_all } 
 
