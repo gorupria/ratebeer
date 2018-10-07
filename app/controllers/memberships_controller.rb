@@ -57,7 +57,6 @@ class MembershipsController < ApplicationController
   # DELETE /memberships/1
   # DELETE /memberships/1.json
   def destroy
-    byebug
     @membership = current_user.memberships.find(params[:beer_club_id])
     @membership.destroy
     respond_to do |format|
