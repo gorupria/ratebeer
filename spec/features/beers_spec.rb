@@ -5,7 +5,8 @@ describe "Beer" do
   BeerClub
   BeerClubsController
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
-  let!(:beer) { FactoryBot.create :beer, name: "iso 3", brewery: brewery }
+  let!(:style) { FactoryBot.create :style, name: "Lager" }
+  let!(:beer) { FactoryBot.create :beer, name: "iso 3", style: style, brewery: brewery }
   let!(:user){ FactoryBot.create(:user) }
 
   before :each do

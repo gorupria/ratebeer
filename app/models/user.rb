@@ -30,7 +30,7 @@ class User < ApplicationRecord
     avg_rating = ratings.map { |rating| rating.beer.average_rating } 
     max_index = avg_rating.index(avg_rating.max)
     
-    return ratings[max_index].beer.style
+    return ratings[max_index].beer.style.name
   end
 
   def favorite_brewery

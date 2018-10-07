@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe Beer, type: :model do
 
   it "should set the name, style and brewery of the beer" do
-    beer = Beer.new name: "karhu", style: "lager", brewery_id: 1
+    beer = Beer.new name: "karhu", style_id: 1 , brewery_id: 1
     expect(beer.name).to eq("karhu")
-    expect(beer.style).to eq("lager")
+    expect(beer.style_id).to eq(1)
     expect(beer.brewery_id).to eq 1
   end
   
@@ -19,7 +19,7 @@ RSpec.describe Beer, type: :model do
   end
 
   it "is not saved if name is not set" do 
-    beer = Beer.create style: "lager", brewery_id: 1
+    beer = Beer.create style_id: 1 , brewery_id: 1
     expect(beer.valid?).to be(false)
     expect(Beer.count).to eq 0
   end

@@ -3,8 +3,10 @@ include Helpers
 
 describe "Rating" do
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
-  let!(:beer1) { FactoryBot.create :beer, name: "iso 3", style: "Lager", brewery: brewery }
-  let!(:beer2) { FactoryBot.create :beer, name: "Karhu", style: "IPA", brewery: brewery }
+  let!(:style1) { FactoryBot.create :style, name: "Lager" }
+  let!(:style2) { FactoryBot.create :style, name: "IPA" }
+  let!(:beer1) { FactoryBot.create :beer, name: "iso 3", style: style1, brewery: brewery }
+  let!(:beer2) { FactoryBot.create :beer, name: "Karhu", style: style2, brewery: brewery }
   let!(:user) { FactoryBot.create(:user) }
   let!(:user2) { FactoryBot.create :user, username: "Mike" }
   
@@ -71,7 +73,8 @@ describe "Rating" do
 
   it "have favorite beer/brewery if has rating" do
     brewery2 = FactoryBot.create(:brewery, name: "Carlsberg") 
-    beer2 = FactoryBot.create(:beer, name: "Karhu", style: "IPA", brewery: brewery2)
+    style1 = FactoryBot.create(:style, name: "IPA")
+    beer2 = FactoryBot.create(:beer, name: "Karhu", style: style1, brewery: brewery2)
     FactoryBot.create :rating, score: 15, beer: beer1, user: user
     FactoryBot.create :rating, score: 25, beer: beer1, user: user
     FactoryBot.create :rating, score: 35, beer: beer2, user: user

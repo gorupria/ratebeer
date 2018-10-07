@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'styles/index'
+  get 'styles/show'
+  get 'places/index'
+  get 'places/search'
+
   resources :memberships
   resources :beer_clubs
   get 'sessions/new'
@@ -6,6 +11,11 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
   resources :users
   root 'breweries#index'
+
+  resources :styles
+  resources :places, only: [:index, :show]
+  # get 'places', to: 'places#index'
+  post 'places', to: 'places#search'
 
   resources :beers
   resources :breweries

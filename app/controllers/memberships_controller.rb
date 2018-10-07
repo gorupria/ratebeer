@@ -30,7 +30,7 @@ class MembershipsController < ApplicationController
 
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
+        format.html { redirect_to beer_club_path(@membership.beer_club_id), notice: "#{current_user.username}, welcome to the club!" }
         format.json { render :show, status: :created, location: @membership }
       else
         @beer_clubs = BeerClub.all
@@ -57,9 +57,11 @@ class MembershipsController < ApplicationController
   # DELETE /memberships/1
   # DELETE /memberships/1.json
   def destroy
+    byebug
+    @membership = current_user.memberships.find(params[:beer_club_id])
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Membership was successfully destroyed.' }
+      format.html { redirect_to user, notice: 'Membership was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
