@@ -30,5 +30,7 @@
 <% end %>
 <br>
 <%= (link_to 'Edit', edit_beer_club_path(@beer_club), class:"btn btn-primary active") if current_user %> 
-<%= (link_to 'Destroy the club', @beer_club, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger active") if current_user.admin %>
+<% if current_user and current_user.admin %>
+  <%= (link_to 'Destroy the club', @beer_club, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger active")  %>
+<% end %>
 
