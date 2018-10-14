@@ -6,7 +6,7 @@ module RatingAverage
     ratings.each do |rating|
       tot += rating.score
     end
-    (tot.to_f/ratings.count).round(2)
+    (tot.to_f/ratings.count)
   end
 
 end

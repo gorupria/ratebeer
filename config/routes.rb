@@ -10,7 +10,12 @@ Rails.application.routes.draw do
   post 'places', to: 'places#search'
 
   resources :beers
-  resources :breweries
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+  resources :users do
+    post 'toggle_frozen', on: :member
+  end
   get 'kaikki_bisset', to: 'beers#index'
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'

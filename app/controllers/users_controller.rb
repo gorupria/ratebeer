@@ -22,6 +22,14 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def toggle_frozen
+    user = User.find(params[:id])
+    user.update_attribute :active, (not user.active)
+
+    new_status = user.active? ? "active" : "frozen"
+    redirect_to user, notice: "#{user.username} is #{new_status}"
+  end
+
   # POST /users
   # POST /users.json
   def create
@@ -71,6 +79,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :password, :password_confirmation, :active)
     end
 end

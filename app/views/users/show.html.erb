@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Username:</strong>
+<h2>
   <%= @user.username %>
-</p>
+  <% if not @user.active %>
+    <span class="label label-primary">Account frozen</span>
+  <% end %>
+</h2>
 
 <p>
   <% if @user.favorite_style.nil? %>
@@ -22,15 +22,18 @@
 </p>
 
 <p>has made <%= pluralize(@user.ratings.count, 'rating') %> </p>
-<p>Average rating: <%= @user.average_rating %> </p>
-
-<strong>Ratings</strong>
+<p>Average rating: <%= round(@user.average_rating) %> </p>
+<% if current_user.admin %>
+  <%= link_to  @user.active ? "Freeze account" : "Reactivate account", toggle_frozen_user_path(@user.id), method: :post, class: "btn btn-danger" %>
+<% end %>
+<br>
+<h3>Ratings</h3>
 <ul>
 <% @user.ratings.each do |rating| %>
   <li>
     <%= rating %> 
     <% if @user == current_user %>
-      <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' }, class: "rating-del-btn" %>
+      <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %>
     <% end %>
   </li>
 <% end %>
@@ -44,7 +47,7 @@
 <% end %>
 
 <% if !current_user.nil? && current_user == @user %>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Delete', current_user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary active" %> 
+  <%= link_to 'Delete', current_user, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger active" %>
 <% end %>
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', users_path, class:"btn btn-primary active" %>
