@@ -12,6 +12,11 @@ class MembershipsController < ApplicationController
   def show
   end
 
+  def confirm_membership
+    membership = Membership.find(params[:id])
+    membership.update_attribute :confirmed, true
+    redirect_to current_user, notice: "Membership has been confirmed."
+  end
   # GET /memberships/new
   def new
     @membership = Membership.new
@@ -72,6 +77,6 @@ class MembershipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def membership_params
-      params.require(:membership).permit(:beer_club_id, :user_id)
+      params.require(:membership).permit(:beer_club_id, :user_id, :confirmed)
     end
 end

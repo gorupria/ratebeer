@@ -23,8 +23,8 @@
 
 <p>has made <%= pluralize(@user.ratings.count, 'rating') %> </p>
 <p>Average rating: <%= round(@user.average_rating) %> </p>
-<% if current_user.admin %>
-  <%= link_to  @user.active ? "Freeze account" : "Reactivate account", toggle_frozen_user_path(@user.id), method: :post, class: "btn btn-danger" %>
+<% if current_user != nil && current_user.admin %>
+  <%= link_to  @user.active ? "Freeze account" : "Reactivate account", toggle_frozen_user_path(@user.id), method: :post, class: "btn btn-danger active" %>
 <% end %>
 <br>
 <h3>Ratings</h3>
@@ -41,8 +41,14 @@
 
 <% if current_user == @user %>
   <h2>Member of </h2>
-  <% current_user.beer_clubs.each do |beer_club| %>
-    <p><%= beer_club.name %></p> 
+  <% current_user.memberships.each do |membership| %>
+    <p><%= membership.beer_club.name if membership.confirmed %></p> 
+  <% end %>
+
+  <h2>Applied membership of</h2>
+  <% if @user.memberships.each do |membership| %>
+    <p><%= membership.beer_club.name unless membership.confirmed %></p>
+  <% end %>
   <% end %>
 <% end %>
 

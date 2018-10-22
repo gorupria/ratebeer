@@ -2,6 +2,10 @@ class SessionsController < ApplicationController
   def new
   end
 
+  def create_oauth
+    byebug
+  end
+
   def create
     user = User.find_by username: params[:username]
     if user.active == false

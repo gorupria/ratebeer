@@ -16,9 +16,18 @@
 <% end %>
 
 <h2> Members </h2>
-  <% @beer_club.users.each do |user| %>
+  <% @beer_club.memberships.each do |member| %>
+    <% if member.confirmed %>
+      <ul>
+        <li><%= member.user.username %></li>
+      </ul>
+    <% end %>
+  <% end %>
+
+<h2>Outstanding applications</h2>
+  <% @applicants.each do |applicant| %>
     <ul>
-      <li><%= user.username %></li>
+      <li><%= applicant.user.username %> <%= link_to 'Confirm', confirm_membership_membership_path(applicant.id), method: :post, class: "btn btn-primary btn-sm active" %></li>
     </ul>
   <% end %>
 

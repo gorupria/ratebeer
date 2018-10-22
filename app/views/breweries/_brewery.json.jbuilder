@@ -1,2 +1,11 @@
-json.extract! brewery, :id, :name, :year, :created_at, :updated_at
-json.url brewery_url(brewery, format: :json)
+json.extract! brewery, :id, :name, :year
+json.num_beer do
+  json.num_of_beer brewery.beers.count
+end
+json.brewery do 
+  if brewery.active
+    json.active 'Yes'
+  else
+    json.active 'No'
+  end
+end
