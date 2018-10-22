@@ -27,7 +27,10 @@
 <h2>Outstanding applications</h2>
   <% @applicants.each do |applicant| %>
     <ul>
-      <li><%= applicant.user.username %> <%= link_to 'Confirm', confirm_membership_membership_path(applicant.id), method: :post, class: "btn btn-primary btn-sm active" %></li>
+      <li><%= applicant.user.username %> 
+      <% if current_user.memberships.find_by(beer_club_id: applicant.beer_club_id).confirmed %>
+        <%= link_to 'Confirm', confirm_membership_membership_path(applicant.id), method: :post, class: "btn btn-primary btn-sm active" %></li>
+      <% end %>
     </ul>
   <% end %>
 
